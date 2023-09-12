@@ -1,9 +1,13 @@
+
 import com.codeborne.selenide.Configuration;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static java.lang.Thread.sleep;
 
 
 public class DemoqaFillFormTest {
@@ -34,7 +38,15 @@ public class DemoqaFillFormTest {
         $(".react-datepicker__month-select").selectOption("May");
         $(".react-datepicker__day--004").click();
 
-        $("#subjectsInput").setValue("p").pressTab();
+        $("#subjectsInput").setValue("m");
+        try {
+            sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        $("#subjectsInput").pressTab();
+
+
         $("#uploadPicture").uploadFromClasspath("1.jpg");
 
         $("label[for='hobbies-checkbox-1']").click();
@@ -54,12 +66,12 @@ public class DemoqaFillFormTest {
                 text("Petrov"),
                 text("1234567890"),
                 text("04 May,2004"),
-                //     text("Maths"),    //надо добиться стабильного результата по этому полю
+                text("Maths"),    //надо добиться стабильного результата по этому полю
                 text("Sports, Reading"),
                 text("1.jpg"),
                 text("somewhere"),
                 text("Uttar Pradesh Agra")
         );
 
-       }
+    }
 }

@@ -1,19 +1,16 @@
-
 import com.codeborne.selenide.Configuration;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static java.lang.Thread.sleep;
 
 
 public class DemoqaFillFormTest {
     @BeforeAll
     static void beforeAll() {
-        Configuration.browser = "firefox";
+        Configuration.browser = "chrome";
         Configuration.holdBrowserOpen = false;
         Configuration.browserSize = "1300x1200";
         Configuration.baseUrl = "https://demoqa.com";
@@ -38,14 +35,7 @@ public class DemoqaFillFormTest {
         $(".react-datepicker__month-select").selectOption("May");
         $(".react-datepicker__day--004").click();
 
-        $("#subjectsInput").setValue("m");
-        try {
-            sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        $("#subjectsInput").pressTab();
-
+        $("#subjectsInput").setValue("m").pressTab();
 
         $("#uploadPicture").uploadFromClasspath("1.jpg");
 

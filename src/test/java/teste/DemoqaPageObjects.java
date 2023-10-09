@@ -1,34 +1,26 @@
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
+package teste;
+
 import org.junit.jupiter.api.Test;
+import pages.RegistrationFormPage;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 
 
-public class DemoqaFillFormTest {
-    @BeforeAll
-    static void beforeAll() {
-        Configuration.browser = "chrome";
-        Configuration.holdBrowserOpen = false;
-        Configuration.browserSize = "1300x1200";
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.pageLoadStrategy = "eager";
-
-    }
-
+public class DemoqaPageObjects extends TestBase {
+    RegistrationFormPage registrationFormPage = new RegistrationFormPage();
 
     @Test
     void mainTest() {
 
-        open("/automation-practice-form");
+        registrationFormPage
+                .openPage()
+                .setFirstName("Ivan")
+                .setLastName("Petrov")
+                .setUserEmail("test@email.test")
+                .userNumberInput("1234567890")
+                .setGender();
 
-        $("#firstName").setValue("Ivan");
-        $("#lastName").setValue("Petrov");
-        $("#userEmail").setValue("test@email.test");
-        $(".custom-control-label").click();
-        $("#userNumber").setValue("1234567890");
 
         $("#dateOfBirthInput").click();
         $(".react-datepicker__year-select").selectOption("2004");

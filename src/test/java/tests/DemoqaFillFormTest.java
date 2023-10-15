@@ -1,26 +1,27 @@
-package teste;
+package tests;
 
 import org.junit.jupiter.api.Test;
-import pages.RegistrationFormPage;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 
-public class DemoqaPageObjects extends TestBase {
-    RegistrationFormPage registrationFormPage = new RegistrationFormPage();
+public class DemoqaFillFormTest extends TestBase {
+
+
+
 
     @Test
     void mainTest() {
 
-        registrationFormPage
-                .openPage()
-                .setFirstName("Ivan")
-                .setLastName("Petrov")
-                .setUserEmail("test@email.test")
-                .userNumberInput("1234567890")
-                .setGender();
+        open("/automation-practice-form");
 
+        $("#firstName").setValue("Ivan");
+        $("#lastName").setValue("Petrov");
+        $("#userEmail").setValue("test@email.test");
+        $(".custom-control-label").click();
+        $("#userNumber").setValue("1234567890");
 
         $("#dateOfBirthInput").click();
         $(".react-datepicker__year-select").selectOption("2004");

@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Test;
 import pages.RegistrationFormPage;
 import pages.components.TableComponent;
 
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selenide.$;
+
 
 public class DemoqaPageObjectsTest extends TestBase {
     RegistrationFormPage registrationFormPage = new RegistrationFormPage();
@@ -14,6 +17,7 @@ public class DemoqaPageObjectsTest extends TestBase {
 
         registrationFormPage
                 .openPage()
+                .removeBanners()
                 .setFirstName("Ivan")
                 .setLastName("Petrov")
                 .setUserEmail("test@email.test")
@@ -29,17 +33,18 @@ public class DemoqaPageObjectsTest extends TestBase {
                 .setUserState("Uttar Pradesh")
                 .setUserCity("Agra")
                 .hitSubmitWithBothLegs();
+        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         tableComponent
-                .checkTitle()
+                //   .checkTitle()
                 .checkResult("Student Name", "Ivan Petrov")
                 .checkResult("Student Email", "test@email.test")
                 .checkResult("Mobile", "1234567890")
                 .checkResult("Date of Birth", "04 July,2001")
                 .checkResult("Subjects", "Maths")
                 .checkResult("Hobbies", "Sports, Reading")
-                .checkResult("Picture","1.jpg")
-                .checkResult("Address","A long time ago in a galaxy far, far away")
-                .checkResult("State and City","Uttar P")
+                .checkResult("Picture", "1.jpg")
+                .checkResult("Address", "A long time ago in a galaxy far, far away")
+                .checkResult("State and City", "Uttar P")
         ;
 
     }

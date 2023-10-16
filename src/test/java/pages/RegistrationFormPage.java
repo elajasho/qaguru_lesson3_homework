@@ -4,8 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import org.jetbrains.annotations.NotNull;
 import pages.components.CalendarComponent;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationFormPage {
     /////SelenidePageElements
@@ -22,7 +21,13 @@ public class RegistrationFormPage {
             userHobbiesInput3 = $("label[for='hobbies-checkbox-3']"),
             userAddressInput = $("#currentAddress"),
             userStateInput = $("#react-select-3-input"),
-            userCityInput = $("#react-select-4-input");
+            userCityInput = $("#react-select-4-input"),
+            userGenderSelector = $(".custom-control-label"),
+            userBirthdaySelector = $("#dateOfBirthInput"),
+            userSubjectSelector = $("#subjectsInput"),
+            userStateSelector = $("#state"),
+            userCitySelector = $("#city"),
+            submitButtonSelector = $("#submit");
 
 
     /////PageActions
@@ -52,12 +57,12 @@ public class RegistrationFormPage {
     }
 
     public RegistrationFormPage setGender() {
-        $(".custom-control-label").click();
+        userGenderSelector.click();
         return this;
     }
 
     public RegistrationFormPage setBirthday(String day, String month, String year) {
-        $("#dateOfBirthInput").click();
+        userBirthdaySelector.click();
         birthday.setDate(day, month, year);
 
         return this;
@@ -67,7 +72,7 @@ public class RegistrationFormPage {
 
     public RegistrationFormPage setSubjects(String value) {
         userInputSubjects.setValue(value);
-        $("#subjectsInput").pressTab();
+        userSubjectSelector.pressTab();
         return this;
     }
 
@@ -104,20 +109,26 @@ public class RegistrationFormPage {
     }
 
     public RegistrationFormPage setUserState(String value) {
-        $("#state").click();
+        userStateSelector.click();
         userStateInput.setValue(value).pressEnter();
         return this;
     }
 
     public RegistrationFormPage setUserCity(String value) {
-        $("#city").click();
+        userCitySelector.click();
         userCityInput.setValue(value).pressEnter();
 
         return this;
     }
 
     public void hitSubmitWithBothLegs() {
-        $("#submit").click();
+        submitButtonSelector.click();
+    }
+
+    public RegistrationFormPage removeBanners() {
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
+        return this;
     }
 
 

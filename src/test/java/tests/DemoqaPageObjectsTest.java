@@ -1,16 +1,31 @@
 package tests;
 
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationFormPage;
 import pages.components.TableComponent;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
+import java.util.Locale;
 
 
 public class DemoqaPageObjectsTest extends TestBase {
     RegistrationFormPage registrationFormPage = new RegistrationFormPage();
     TableComponent tableComponent = new TableComponent();
+
+    Faker faker = new Faker(new Locale("en"));
+
+
+    String firstName = faker.name().firstName();
+    String lastName = faker.name().lastName();
+    String streetAddress = faker.address().streetAddress();
+    String randomEmail = faker.internet().emailAddress();
+    String randomhoneNumber = faker.number().digits(10);
+    String randomDay = String.format("%02d", faker.number().numberBetween(1, 30));
+    String randomMonth = faker.options().option("January", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+    String randomYear = String.valueOf(faker.number().numberBetween(1900, 2100));
+    String randomSubject = faker.options().option("Arts", "Biology", "Chemistry", "English", "Hindi", "Maths", "Physics");
+
+
 
     @Test
     void mainTest() {
@@ -18,34 +33,50 @@ public class DemoqaPageObjectsTest extends TestBase {
         registrationFormPage
                 .openPage()
                 .removeBanners()
-                .setFirstName("Ivan")
-                .setLastName("Petrov")
-                .setUserEmail("test@email.test")
-                .userNumberInput("1234567890")
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setUserEmail(randomEmail)
+                .userNumberInput(randomhoneNumber)
                 .setGender()
-                .setBirthday("04", "July", "2001")
-                .setSubjects("m")
+                .setBirthday(randomDay, randomMonth, randomYear)
+                .setSubjects(randomSubject)
                 .setPicture("1.jpg")
                 .setHobbiesSports("Yes")
                 .setHobbiesReading("Yes")
                 .setHobbiesMusic("No")
-                .setUserAddress("A long time ago in a galaxy far, far away")
+                .setUserAddress(streetAddress)
                 .setUserState("Uttar Pradesh")
-                .setUserCity("Agra")
+                .setUserCity("Agra");
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        registrationFormPage
                 .hitSubmitWithBothLegs();
-        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
+
+
+
+
+
         tableComponent
-                //   .checkTitle()
-                .checkResult("Student Name", "Ivan Petrov")
-                .checkResult("Student Email", "test@email.test")
-                .checkResult("Mobile", "1234567890")
-                .checkResult("Date of Birth", "04 July,2001")
-                .checkResult("Subjects", "Maths")
+                .checkResult("Student Name", firstName + " " + lastName)
+                .checkResult("Student Email", randomEmail)
+                .checkResult("Mobile", randomhoneNumber)
+                .checkResult("Date of Birth", randomDay + " " + randomMonth + "," + randomYear)
+                .checkResult("Subjects", randomSubject)
                 .checkResult("Hobbies", "Sports, Reading")
                 .checkResult("Picture", "1.jpg")
-                .checkResult("Address", "A long time ago in a galaxy far, far away")
+                .checkResult("Address", streetAddress)
                 .checkResult("State and City", "Uttar P")
         ;
-
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
+
+
 }

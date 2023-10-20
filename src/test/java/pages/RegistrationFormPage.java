@@ -30,6 +30,7 @@ public class RegistrationFormPage {
             submitButtonSelector = $("#submit");
 
 
+
     /////PageActions
     public RegistrationFormPage openPage() {
         open("/automation-practice-form");
@@ -69,15 +70,14 @@ public class RegistrationFormPage {
 
     }
 
-
     public RegistrationFormPage setSubjects(String value) {
         userInputSubjects.setValue(value);
         userSubjectSelector.pressTab();
         return this;
     }
 
-
     public RegistrationFormPage setPicture(String value) {
+
         userPictureInput.uploadFromClasspath(value);
         return this;
     }
@@ -130,9 +130,5 @@ public class RegistrationFormPage {
         executeJavaScript("$('footer').remove()");
         return this;
     }
-
-
-    /////// Results check
-
 
 }

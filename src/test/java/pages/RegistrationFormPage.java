@@ -4,7 +4,12 @@ import com.codeborne.selenide.SelenideElement;
 import org.jetbrains.annotations.NotNull;
 import pages.components.CalendarComponent;
 
+import java.io.File;
+import java.util.Date;
+
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static tests.TestData.imagePath;
 
 public class RegistrationFormPage {
     /////SelenidePageElements
@@ -16,9 +21,9 @@ public class RegistrationFormPage {
             userNumberInput = $("#userNumber"),
             userInputSubjects = $("#subjectsInput"),
             userPictureInput = $("#uploadPicture"),
-            userHobbiesInput1 = $("label[for='hobbies-checkbox-1']"),
-            userHobbiesInput2 = $("label[for='hobbies-checkbox-2']"),
-            userHobbiesInput3 = $("label[for='hobbies-checkbox-3']"),
+            userHobbiesInput1 = $(byText("Sports")),
+            userHobbiesInput2 = $(byText("Reading")),
+            userHobbiesInput3 = $(byText("Music")),
             userAddressInput = $("#currentAddress"),
             userStateInput = $("#react-select-3-input"),
             userCityInput = $("#react-select-4-input"),
@@ -28,8 +33,6 @@ public class RegistrationFormPage {
             userStateSelector = $("#state"),
             userCitySelector = $("#city"),
             submitButtonSelector = $("#submit");
-
-
 
     /////PageActions
     public RegistrationFormPage openPage() {
@@ -62,12 +65,10 @@ public class RegistrationFormPage {
         return this;
     }
 
-    public RegistrationFormPage setBirthday(String day, String month, String year) {
+    public RegistrationFormPage setBirthday(Date value) {
         userBirthdaySelector.click();
-        birthday.setDate(day, month, year);
-
+        birthday.setDate(value);
         return this;
-
     }
 
     public RegistrationFormPage setSubjects(String value) {
@@ -76,9 +77,8 @@ public class RegistrationFormPage {
         return this;
     }
 
-    public RegistrationFormPage setPicture(String value) {
-
-        userPictureInput.uploadFromClasspath(value);
+    public RegistrationFormPage setPicture() {
+        userPictureInput.uploadFile(new File(imagePath));
         return this;
     }
 
@@ -130,5 +130,4 @@ public class RegistrationFormPage {
         executeJavaScript("$('footer').remove()");
         return this;
     }
-
 }

@@ -1,82 +1,61 @@
 package tests;
 
-import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationFormPage;
+import pages.components.CalendarComponent;
 import pages.components.TableComponent;
 
-import java.util.Locale;
-
+import static pages.components.CalendarComponent.*;
+import static tests.TestData.*;
 
 public class DemoqaPageObjectsTest extends TestBase {
     RegistrationFormPage registrationFormPage = new RegistrationFormPage();
     TableComponent tableComponent = new TableComponent();
-
-    Faker faker = new Faker(new Locale("en"));
-
-
-    String firstName = faker.name().firstName();
-    String lastName = faker.name().lastName();
-    String streetAddress = faker.address().streetAddress();
-    String randomEmail = faker.internet().emailAddress();
-    String randomhoneNumber = faker.number().digits(10);
-    String randomDay = String.format("%02d", faker.number().numberBetween(1, 30));
-    String randomMonth = faker.options().option("January", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
-    String randomYear = String.valueOf(faker.number().numberBetween(1900, 2100));
-    String randomSubject = faker.options().option("Arts", "Biology", "Chemistry", "English", "Hindi", "Maths", "Physics");
-
-
+    TestData testData = new TestData();
+    CalendarComponent calendarComponent = new CalendarComponent();
 
     @Test
     void mainTest() {
-
         registrationFormPage
                 .openPage()
                 .removeBanners()
                 .setFirstName(firstName)
                 .setLastName(lastName)
                 .setUserEmail(randomEmail)
-                .userNumberInput(randomhoneNumber)
+                .userNumberInput(randomPhoneNumber)
                 .setGender()
-                .setBirthday(randomDay, randomMonth, randomYear)
+                .setBirthday(randomDate)
                 .setSubjects(randomSubject)
-                .setPicture("1.jpg")
-                .setHobbiesSports("Yes")
-                .setHobbiesReading("Yes")
-                .setHobbiesMusic("No")
+                .setPicture()
+                .setHobbiesSports(randomSport)
+                .setHobbiesReading(randomReading)
+                .setHobbiesMusic(randomMusic)
                 .setUserAddress(streetAddress)
-                .setUserState("Uttar Pradesh")
-                .setUserCity("Agra");
+                .setUserState(randomState)
+                .setUserCity(testData.getRandomCity());
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         registrationFormPage
                 .hitSubmitWithBothLegs();
-
-
-
-
 
         tableComponent
                 .checkResult("Student Name", firstName + " " + lastName)
                 .checkResult("Student Email", randomEmail)
-                .checkResult("Mobile", randomhoneNumber)
-                .checkResult("Date of Birth", randomDay + " " + randomMonth + "," + randomYear)
+                .checkResult("Mobile", randomPhoneNumber)
+                .checkResult("Date of Birth", checkDay + " " + checkMonth + "," + checkYear)
                 .checkResult("Subjects", randomSubject)
-                .checkResult("Hobbies", "Sports, Reading")
-                .checkResult("Picture", "1.jpg")
+                .checkResult("Picture", imageName)
                 .checkResult("Address", streetAddress)
-                .checkResult("State and City", "Uttar P")
-        ;
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+                .checkResult("State and City", randomState)
+                .checkResult("State and City", testData.getRandomCity());
+
+        if (randomSport.equals("Yes")) {
+            tableComponent.checkResult("Hobbies", "Sports");
+        }
+        if (randomReading.equals("Yes")) {
+            tableComponent.checkResult("Hobbies", "Reading");
+        }
+        if (randomMusic.equals("Yes")) {
+            tableComponent.checkResult("Hobbies", "Music");
         }
     }
-
-
 }

@@ -4,7 +4,6 @@ import com.codeborne.selenide.Condition;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -15,16 +14,14 @@ public class CalendarComponent {
     public static String checkYear;
     public static String checkMonth;
     public static String checkDay;
-    public static String formattedDate;
 
-    public void setDate(Date value) {
+    public void setDate() {
         // Создаем Calendar и устанавливаем его на случайную дату
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(randomDate);
 
         // Извлекаем значения дня, месяца и года
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-        int month = calendar.get(Calendar.MONTH) + 1; // Месяцы начинаются с 0 (январь)
         int year = calendar.get(Calendar.YEAR);
 
         // Форматируем месяц в текстовое представление

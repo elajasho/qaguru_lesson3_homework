@@ -2,7 +2,6 @@ package tests;
 
 import org.junit.jupiter.api.Test;
 import pages.RegistrationFormPage;
-import pages.components.CalendarComponent;
 import pages.components.TableComponent;
 
 import static pages.components.CalendarComponent.*;
@@ -12,7 +11,6 @@ public class DemoqaPageObjectsTest extends TestBase {
     RegistrationFormPage registrationFormPage = new RegistrationFormPage();
     TableComponent tableComponent = new TableComponent();
     TestData testData = new TestData();
-    CalendarComponent calendarComponent = new CalendarComponent();
 
     @Test
     void mainTest() {
@@ -24,7 +22,7 @@ public class DemoqaPageObjectsTest extends TestBase {
                 .setUserEmail(randomEmail)
                 .userNumberInput(randomPhoneNumber)
                 .setGender()
-                .setBirthday(randomDate)
+                .setBirthday()
                 .setSubjects(randomSubject)
                 .setPicture()
                 .setHobbiesSports(randomSport)

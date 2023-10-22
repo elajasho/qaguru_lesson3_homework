@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 import pages.components.CalendarComponent;
 
 import java.io.File;
-import java.util.Date;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -65,9 +64,9 @@ public class RegistrationFormPage {
         return this;
     }
 
-    public RegistrationFormPage setBirthday(Date value) {
+    public RegistrationFormPage setBirthday() {
         userBirthdaySelector.click();
-        birthday.setDate(value);
+        birthday.setDate();
         return this;
     }
 
@@ -114,11 +113,9 @@ public class RegistrationFormPage {
         return this;
     }
 
-    public RegistrationFormPage setUserCity(String value) {
+    public void setUserCity(String value) {
         userCitySelector.click();
         userCityInput.setValue(value).pressEnter();
-
-        return this;
     }
 
     public void hitSubmitWithBothLegs() {

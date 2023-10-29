@@ -6,11 +6,13 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 public class TestData {
-    static Faker faker = new Faker(new Locale("en"));
+    Faker faker = new Faker(new Locale("en"));
 
     String[] NCR = new String[]{"Delhi", "Gurgaon", "Noida"};
     String[] UttarPradesh = new String[]{"Agra", "Lucknow", "Merrut"};
@@ -49,22 +51,26 @@ public class TestData {
             default:
                 break;
         }
-
-
         assert selectedList != null;
         int randomIndex = faker.number().numberBetween(0, selectedList.length - 1);
         randomValue = selectedList[randomIndex];
-
         return randomValue;
     }
 
-    // Рандомная дата из календаря исключает все некорректные значения типа 31 февраля
-    public static Date
-            randomDate = faker.date().birthday();
+    public Date
+            randomDate = faker.date().birthday(0, 100);
 
-    // Создаем рандомный файл с изображением для теста
+    public String getRandomDate() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(randomDate);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int year = calendar.get(Calendar.YEAR);
+        SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM", new Locale("en"));
+        String monthName = monthFormat.format(randomDate);
+        return (day + " " + monthName + "," + year);
+    }
+
     public String imageName = faker.lorem().word() + ".jpg";
-
 
     BufferedImage image = new BufferedImage(800, 600, BufferedImage.TYPE_INT_RGB);
     File outputFile = new File("src/test/resources/" + imageName);

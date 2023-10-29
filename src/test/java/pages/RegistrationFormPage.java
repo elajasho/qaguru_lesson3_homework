@@ -4,6 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
 
 import java.io.File;
+import java.util.Date;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -11,7 +12,6 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationFormPage {
     /////SelenidePageElements
-    CalendarComponent birthday = new CalendarComponent();
     SelenideElement
             firstNameInput = $("#firstName"),
             lastNameInput = $("#lastName"),
@@ -58,10 +58,10 @@ public class RegistrationFormPage {
         $("input[value='" + value + "']").doubleClick();
         return this;
     }
-
-    public RegistrationFormPage setBirthday() {
+    CalendarComponent birthday = new CalendarComponent();
+    public RegistrationFormPage setBirthday(Date value) {
         userBirthdaySelector.click();
-        birthday.setDate();
+        birthday.setDate(value);
         return this;
     }
 

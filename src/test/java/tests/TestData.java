@@ -25,17 +25,13 @@ public class TestData {
             randomPhoneNumber = faker.number().digits(10),
             randomGender = faker.options().option("Male", "Female", "Other"),
             randomSubject = faker.options().option("Arts", "Biology", "Chemistry", "English", "Hindi", "Maths", "Physics"),
-            randomHobbies = faker.options().option("Sports","Reading","Music"),
+            randomHobbies = faker.options().option("Sports", "Reading", "Music"),
 
-
-    //            randomSport = faker.options().option("Yes", "No"),
-//            randomReading = faker.options().option("Yes", "No"),
-//            randomMusic = faker.options().option("Yes", "No"),
-            randomState = faker.options().option("NCR", "Uttar Pradesh", "Haryana", "Rajasthan");
+    randomState = faker.options().option("NCR", "Uttar Pradesh", "Haryana", "Rajasthan");
 
     public String getRandomCity() {
         String[] selectedList = null;
-        String randomValue = "";
+        String randomValue;
 
         switch (randomState) {
             case "NCR":
@@ -54,24 +50,24 @@ public class TestData {
                 break;
         }
 
-        if (selectedList != null) {
-            int randomIndex = faker.number().numberBetween(0, selectedList.length - 1);
-            randomValue = selectedList[randomIndex];
-        }
+
+        assert selectedList != null;
+        int randomIndex = faker.number().numberBetween(0, selectedList.length - 1);
+        randomValue = selectedList[randomIndex];
+
         return randomValue;
     }
 
     // Рандомная дата из календаря исключает все некорректные значения типа 31 февраля
-    public static final Date
+    public static Date
             randomDate = faker.date().birthday();
 
     // Создаем рандомный файл с изображением для теста
-    public static String imageName = faker.lorem().word() + ".jpg",
-            imagePath = "src/test/resources/" + imageName;
-    int imageWidth = 800;
-    int imageHeight = 600;
-    BufferedImage image = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_RGB);
-    File outputFile = new File(imagePath);
+    public String imageName = faker.lorem().word() + ".jpg";
+
+
+    BufferedImage image = new BufferedImage(800, 600, BufferedImage.TYPE_INT_RGB);
+    File outputFile = new File("src/test/resources/" + imageName);
 
     {
         try {

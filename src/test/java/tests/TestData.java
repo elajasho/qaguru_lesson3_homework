@@ -17,7 +17,7 @@ public class TestData {
     String[] Haryana = new String[]{"Karnal", "Panipat"};
     String[] Rajasthan = new String[]{"Jaipur", "Jaiselmer"};
 
-    public static final String
+    public String
             firstName = faker.name().firstName(),
             lastName = faker.name().lastName(),
             streetAddress = faker.address().streetAddress(),
@@ -25,9 +25,12 @@ public class TestData {
             randomPhoneNumber = faker.number().digits(10),
             randomGender = faker.options().option("Male", "Female", "Other"),
             randomSubject = faker.options().option("Arts", "Biology", "Chemistry", "English", "Hindi", "Maths", "Physics"),
-            randomSport = faker.options().option("Yes", "No"),
-            randomReading = faker.options().option("Yes", "No"),
-            randomMusic = faker.options().option("Yes", "No"),
+            randomHobbies = faker.options().option("Sports","Reading","Music"),
+
+
+    //            randomSport = faker.options().option("Yes", "No"),
+//            randomReading = faker.options().option("Yes", "No"),
+//            randomMusic = faker.options().option("Yes", "No"),
             randomState = faker.options().option("NCR", "Uttar Pradesh", "Haryana", "Rajasthan");
 
     public String getRandomCity() {

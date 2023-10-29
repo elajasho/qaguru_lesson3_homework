@@ -1,7 +1,6 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
-import org.jetbrains.annotations.NotNull;
 import pages.components.CalendarComponent;
 
 import java.io.File;
@@ -20,9 +19,9 @@ public class RegistrationFormPage {
             userNumberInput = $("#userNumber"),
             userInputSubjects = $("#subjectsInput"),
             userPictureInput = $("#uploadPicture"),
-            userHobbiesInput1 = $(byText("Sports")),
-            userHobbiesInput2 = $(byText("Reading")),
-            userHobbiesInput3 = $(byText("Music")),
+//            userHobbiesInput1 = $(byText("Sports")),
+//            userHobbiesInput2 = $(byText("Reading")),
+//            userHobbiesInput3 = $(byText("Music")),
             userAddressInput = $("#currentAddress"),
             userStateInput = $("#react-select-3-input"),
             userCityInput = $("#react-select-4-input"),
@@ -77,32 +76,35 @@ public class RegistrationFormPage {
         userSubjectSelector.pressTab();
         return this;
     }
-
+public RegistrationFormPage setHobbies(String value) {
+    $(byText(value)).click();
+    return this;
+}
     public RegistrationFormPage setPicture() {
         userPictureInput.uploadFile(new File(imagePath));
         return this;
     }
 
-    public RegistrationFormPage setHobbiesSports(@NotNull String value) {
-        if (value.equals("Yes")) {
-            userHobbiesInput1.click();
-        }
-        return this;
-    }
-
-    public RegistrationFormPage setHobbiesReading(@NotNull String value) {
-        if (value.equals("Yes")) {
-            userHobbiesInput2.click();
-        }
-        return this;
-    }
-
-    public RegistrationFormPage setHobbiesMusic(@NotNull String value) {
-        if (value.equals("Yes")) {
-            userHobbiesInput3.click();
-        }
-        return this;
-    }
+//    public RegistrationFormPage setHobbiesSports(@NotNull String value) {
+//        if (value.equals("Yes")) {
+//            userHobbiesInput1.click();
+//        }
+//        return this;
+//    }
+//
+//    public RegistrationFormPage setHobbiesReading(@NotNull String value) {
+//        if (value.equals("Yes")) {
+//            userHobbiesInput2.click();
+//        }
+//        return this;
+//    }
+//
+//    public RegistrationFormPage setHobbiesMusic(@NotNull String value) {
+//        if (value.equals("Yes")) {
+//            userHobbiesInput3.click();
+//        }
+//        return this;
+//    }
 
     public RegistrationFormPage setUserAddress(String value) {
         userAddressInput.setValue(value);

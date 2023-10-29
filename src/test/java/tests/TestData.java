@@ -48,8 +48,7 @@ public class TestData {
             case "Rajasthan":
                 selectedList = Rajasthan;
                 break;
-            default:
-                break;
+
         }
         assert selectedList != null;
         int randomIndex = faker.number().numberBetween(0, selectedList.length - 1);

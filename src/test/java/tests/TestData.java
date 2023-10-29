@@ -23,6 +23,7 @@ public class TestData {
             streetAddress = faker.address().streetAddress(),
             randomEmail = faker.internet().emailAddress(),
             randomPhoneNumber = faker.number().digits(10),
+            randomGender = faker.options().option("Male", "Female", "Other"),
             randomSubject = faker.options().option("Arts", "Biology", "Chemistry", "English", "Hindi", "Maths", "Physics"),
             randomSport = faker.options().option("Yes", "No"),
             randomReading = faker.options().option("Yes", "No"),

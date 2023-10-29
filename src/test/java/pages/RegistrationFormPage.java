@@ -26,8 +26,9 @@ public class RegistrationFormPage {
             userAddressInput = $("#currentAddress"),
             userStateInput = $("#react-select-3-input"),
             userCityInput = $("#react-select-4-input"),
-            userGenderSelector = $(".custom-control-label"),
-            userBirthdaySelector = $("#dateOfBirthInput"),
+    // userGenderSelector = $(".custom-control-label"),
+    //userGenderSelector = $("input[value='value']"),
+    userBirthdaySelector = $("#dateOfBirthInput"),
             userSubjectSelector = $("#subjectsInput"),
             userStateSelector = $("#state"),
             userCitySelector = $("#city"),
@@ -59,8 +60,9 @@ public class RegistrationFormPage {
         return this;
     }
 
-    public RegistrationFormPage setGender() {
-        userGenderSelector.click();
+    public RegistrationFormPage setGender(String value) {
+        //userGenderSelector.
+                $("input[value='" + value + "']").doubleClick();
         return this;
     }
 
@@ -119,6 +121,7 @@ public class RegistrationFormPage {
     }
 
     public void hitSubmitWithBothLegs() {
+
         submitButtonSelector.click();
     }
 

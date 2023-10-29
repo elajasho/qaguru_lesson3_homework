@@ -21,7 +21,7 @@ public class DemoqaPageObjectsTest extends TestBase {
                 .setLastName(lastName)
                 .setUserEmail(randomEmail)
                 .userNumberInput(randomPhoneNumber)
-                .setGender()
+                .setGender(randomGender)
                 .setBirthday()
                 .setSubjects(randomSubject)
                 .setPicture()

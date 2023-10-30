@@ -32,6 +32,7 @@ public class DemoqaPageObjectsTest extends TestBase {
                 .checkResult("Student Name", testData.firstName + " " + testData.lastName)
                 .checkResult("Student Email", testData.randomEmail)
                 .checkResult("Mobile", testData.randomPhoneNumber)
+                .checkResult("Gender", testData.randomGender)
                 .checkResult("Date of Birth", testData.getRandomDate())
                 .checkResult("Subjects", testData.randomSubject)
                 .checkResult("Hobbies", testData.randomHobbies)

@@ -9,7 +9,6 @@ public class TestBase {
         Configuration.browser = "chrome";
         Configuration.holdBrowserOpen = false;
         Configuration.browserSize = "1300x1000";
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.pageLoadStrategy = "eager";
+           Configuration.pageLoadStrategy = "eager";
     }
 }

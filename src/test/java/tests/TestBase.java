@@ -7,8 +7,7 @@ public class TestBase {
     @BeforeAll
     static void beforeAll() {
         Configuration.browser = "chrome";
-        Configuration.holdBrowserOpen = false;
         Configuration.browserSize = "1300x1000";
-           Configuration.pageLoadStrategy = "eager";
+        Configuration.pageLoadStrategy = "eager";
     }
 }
